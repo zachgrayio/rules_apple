@@ -190,10 +190,13 @@ def _signing_command_lines(
     # apple_common.apple_toolchain().developer_dir() won't work here because
     # usage relies on the expansion done in the xcrunwrapper, and the individual
     # signing commands don't bounce through xcrun (and don't need to).
-    commands.append(
-        ("export CODESIGN_ALLOCATE=${DEVELOPER_DIR}/" +
-         "Toolchains/XcodeDefault.xctoolchain/usr/bin/codesign_allocate"),
-    )
+
+    # this variable comes through unbound in RBE even though it's in action-env, need to diagnose.
+    # TODO: disabling this command is surely going to be problematic in the future, so should fix asap
+#    commands.append(
+#        ("export CODESIGN_ALLOCATE=${DEVELOPER_DIR}/" +
+#         "Toolchains/XcodeDefault.xctoolchain/usr/bin/codesign_allocate"),
+#    )
 
     for path_to_sign in paths_to_sign:
         commands.append(_codesign_command_for_path(

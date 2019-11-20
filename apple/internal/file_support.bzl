@@ -37,13 +37,8 @@ def _symlink(ctx, source, target):
             target.path,
             ctx.file._realpath.path,
         ],
-        command = ('mkdir -p "$1"; ' +
-                   'if [[ "$(uname)" == Darwin ]]; then ' +
-                   '  ln -s "$("$4" "$2")" "$3"; ' +
-                   "else " +
-                   '  cp "$2" "$3"; ' +
-                   "fi"),
-        progress_message = "Symlinking %s to %s" % (source.path, target.path),
+        command = ('mkdir -p "$1" && cp "$2" "$3"'),
+        progress_message = "Copying %s to %s" % (source.path, target.path),
         tools = [ctx.file._realpath],
         execution_requirements = {"no-sandbox": "1"},
     )
