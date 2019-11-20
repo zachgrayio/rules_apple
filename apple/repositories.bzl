@@ -104,23 +104,37 @@ def apple_rules_dependencies(ignore_version_differences = False):
         ignore_version_differences = ignore_version_differences,
     )
 
+#    _maybe(
+#        http_archive,
+#        name = "build_bazel_apple_support",
+#        urls = [
+#            "https://github.com/bazelbuild/apple_support/releases/download/0.7.1/apple_support.0.7.1.tar.gz",
+#        ],
+#        sha256 = "122ebf7fe7d1c8e938af6aeaee0efe788a3a2449ece5a8d6a428cb18d6f88033",
+#        ignore_version_differences = ignore_version_differences,
+#    )
+#
+#    _maybe(
+#        http_archive,
+#        name = "build_bazel_rules_swift",
+#        urls = [
+#            "https://github.com/bazelbuild/rules_swift/releases/download/0.12.1/rules_swift.0.12.1.tar.gz",
+#        ],
+#        sha256 = "18cd4df4e410b0439a4935f9ca035bd979993d42372ba79e7f2d4fafe9596ef0",
+#        ignore_version_differences = ignore_version_differences,
+#    )
+
     _maybe(
-        http_archive,
-        name = "build_bazel_apple_support",
-        urls = [
-            "https://github.com/bazelbuild/apple_support/releases/download/0.7.1/apple_support.0.7.1.tar.gz",
-        ],
-        sha256 = "122ebf7fe7d1c8e938af6aeaee0efe788a3a2449ece5a8d6a428cb18d6f88033",
+        native.local_repository,
+        name = "build_bazel_rules_swift",
+        path = "../rules_swift",
         ignore_version_differences = ignore_version_differences,
     )
 
     _maybe(
-        http_archive,
-        name = "build_bazel_rules_swift",
-        urls = [
-            "https://github.com/bazelbuild/rules_swift/releases/download/0.12.1/rules_swift.0.12.1.tar.gz",
-        ],
-        sha256 = "18cd4df4e410b0439a4935f9ca035bd979993d42372ba79e7f2d4fafe9596ef0",
+        native.local_repository,
+        name = "build_bazel_apple_support",
+        path = "../apple_support",
         ignore_version_differences = ignore_version_differences,
     )
 
